@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Ejemplo de formulario para introducir datos en una BD</title>
+	<title>SARPA</title>
 
 	<link rel="stylesheet" href="css/formularios.css">
 </head>
@@ -19,14 +19,14 @@
 		<img class="logo" src="./assets/img/SARPA.png" alt="logo-sarpa">
 	</div>
 
-	<form class="form" action="ejemplo.php" method="GET">
+	<form class="form" action="index.php" method="POST">
 	<h2>Registro de Alumno</h2>
 		<div class="wrapper">
 			<i class="fa fa-boleta"></i>
 			<input class="input-group" id="boleta" type="number" name="boleta" placeholder="Boleta (requerido)"></div>
 		<div class="wrapper">
             <i class="fa fa-user"></i>
-            <input type="text" class="input-group" id="name" name="name" placeholder="Nombre (requerido)"></div>
+            <input type="text" class="input-group" id="nombre" name="nombre" placeholder="Nombre (requerido)"></div>
 		<div class="wrapper">
 			<i class="fa fa-firstln"></i>
 			<input class="input-group" id="paterno" type="text" name="paterno" placeholder="Apellido Paterno (requerido)"></div>
@@ -41,7 +41,7 @@
 			<input class="input-group" id="pass" type="password" name='pass' placeholder="Password"></div>
 		<div class="wrapper">
 			<label for="photo">Foto de Perfil</label>
-			<input class="input-group" type="file" name="photo" id="photo">
+			<input class="input-group" type="file" name="img" id="img">
 		</div>		
 		<button type="submit" class="send-btn">Enviar</button>
 	</form>	
