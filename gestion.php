@@ -9,12 +9,12 @@
 
 <?php
 // Definir las variables con vadenas vacias
-$boletaErr = $nameErr =  $firstlsErr = $secondlsErr = $emailErr = $passErr = $imgErr = $imgCadenaErr = "";
-$boleta = $name = $firstls = $secondls = $email = $pass = $img = $imgCadena = "";
+$nameErr = $emailErr = $ageErr =  $passErr = "";
+$name = $email = $age = $pass = "";
 	
 //Auntenticarse en la BD
 $servername = "direccion.ip.del.servidor";
-$username = "usuario";
+$username = "ususario";
 $password = "password";
 $dbname = "school";
  
@@ -29,33 +29,14 @@ if ($conn->connect_error) {
 }
  
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") { //Si esta madre no sirve ponle un GET <------- RECORDAR BORRARLO ANTES DE PRESENTAR AL PROFE
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
   
-  if (empty($_GET["boleta"])) {
-    $boletaErr = "El numero de boleta es requerido";
-  } else {
-    $boleta = test_input($_GET["boleta"]);
-  }
-  
-
   if (empty($_GET["name"])) {    
 	  $nameErr = "El nombre es requerido";
   } else {
     $name = test_input($_GET["name"]);    
   }
-
-  if (empty($_GET["firstls"])) {
-    $firstlsErr = "El primer apellido es requerido";
-  }else {
-    $firstls = test_input($_GET["firstls"])
-  }
   
-  if (empty($_GET["secondls"])) {
-    $secondlsErr = "El segundo apellido es requerido";
-  }else {
-    $firstls = test_input($_GET["secondls"])
-  }
-
   if (empty($_GET["email"])) {
     $emailErr = "El correo es requerido";
   } else {
@@ -65,6 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //Si esta madre no sirve ponle un GE
       $emailErr = "Formato de correo no válido";
     }
   }
+    
+  if (empty($_GET["age"])) {
+    $age = "";
+  } else {
+    $age = test_input($_GET["age"]);    
+    } 
 
   if (empty($_GET["pass"])) {
     $pass = "";
@@ -72,17 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //Si esta madre no sirve ponle un GE
     $pass = test_input($_GET["pass"]);
   }
 
-  if(isset($_FILES["img"]) && $_FILES["img"]["imgErr"] == 0){
-    $img = $_FILES["img"]["tmp_name"];
-    $imgCadena = base64_encode(file_get_contents($img));
-    echo "Imagen como cadena: " . $imgCadena
-  }else {
-    echo "Error al cargar la imagen";
-  }
-
 #Ingresar los datos en la base de datos
-	$sql = "INSERT INTO alumnos(boleta, name, firstls, secondls, email, pass, imgCadena) VALUES
-    	( '".$boleta."', '".$name."', '".$firstls."', '".$secondls."', '".$email."','".$pass."', '".$imgCadena."')";
+	$sql = "INSERT INTO teachers(name, email, age, pass) VALUES
+    	('".$name."', '".$email."', '".$age."','".$pass."')";
  
 	if ($conn->query($sql) === TRUE) {
     	echo "<h2>el estudiante se agregó correctamente</h2>";
