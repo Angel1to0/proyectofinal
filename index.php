@@ -13,7 +13,7 @@ $boletaErr = $nameErr =  $firstlsErr = $secondlsErr = $emailErr = $passErr = $im
 $boleta = $name = $firstls = $secondls = $email = $pass = $img = $imgCadena = "";
 	
 //Auntenticarse en la BD
-$servername = "localhost/phpmyadmin";
+$servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "sarpa";
