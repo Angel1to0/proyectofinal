@@ -8,74 +8,102 @@
 <body>  
 
 <?php
-// Definir las variables con vadenas vacias
-$nameErr = $emailErr = $ageErr =  $passErr = "";
-$name = $email = $age = $pass = "";
+// Definir las variables con cadenas vacías para mensajes de error y datos del formulario
+$nameErr = $firstlsErr = $secondlsErr = $emailErr = $passErr = $imgErr = $imgCadenaErr = "";
+$name = $firstls = $secondls = $email = $pass = $img = $imgCadena = "";
 	
-//Auntenticarse en la BD
-$servername = "direccion.ip.del.servidor";
-$username = "ususario";
-$password = "password";
-$dbname = "school";
+// Autenticarse en la BD (Base de Datos)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "sarpa";
  
-// Create connection
-$conn = new mysqli($servername,
-    $username, $password, $dbname);
+// Crear conexión a la base de datos
+$conn = new mysqli($servername, $username, $password, $dbname);
  
-// Check connection
+// Verificar la conexión
 if ($conn->connect_error) {
-    die("Connection failed: "
-        . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
- 
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
+// Procesar el formulario si se ha enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
-  if (empty($_GET["name"])) {    
-	  $nameErr = "El nombre es requerido";
+  // Validar y recoger datos del formulario
+
+  // Validar nombre
+  if (empty($_POST["nombre"])) {    
+    $nameErr = "El nombre es requerido";
   } else {
-    $name = test_input($_GET["name"]);    
+    $name = test_input($_POST["nombre"]);    
+  }
+
+  // Validar primer apellido
+  if (empty($_POST["paterno"])) {
+    $firstlsErr = "El primer apellido es requerido";
+  } else {
+    $firstls = test_input($_POST["paterno"]);
   }
   
-  if (empty($_GET["email"])) {
+  // Validar segundo apellido
+  if (empty($_POST["materno"])) {
+    $secondlsErr = "El segundo apellido es requerido";
+  } else {
+    $secondls = test_input($_POST["materno"]);
+  }
+
+  // Validar correo electrónico
+  if (empty($_POST["email"])) {
     $emailErr = "El correo es requerido";
   } else {
-    $email = test_input($_GET["email"]);
-    // Verificar si es un correo correcto
+    $email = test_input($_POST["email"]);
+    // Verificar si es un correo válido
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $emailErr = "Formato de correo no válido";
     }
   }
-    
-  if (empty($_GET["age"])) {
-    $age = "";
-  } else {
-    $age = test_input($_GET["age"]);    
-    } 
 
-  if (empty($_GET["pass"])) {
+  // Recoger y validar contraseña
+  if (empty($_POST["pass"])) {
     $pass = "";
   } else {
-    $pass = test_input($_GET["pass"]);
+    $pass = test_input($_POST["pass"]);
   }
 
-#Ingresar los datos en la base de datos
-	$sql = "INSERT INTO teachers(name, email, age, pass) VALUES
-    	('".$name."', '".$email."', '".$age."','".$pass."')";
+  // Procesar la imagen si se ha adjuntado
+  if (isset($_FILES["img"]) && $_FILES["img"]["error"] == 0) {
+    $img = $_FILES["img"]["tmp_name"];
+    
+    // Verificar el tipo de imagen (puedes agregar más tipos según tus necesidades)
+    $allowed_types = array('jpeg', 'jpg', 'png', 'gif');
+    $img_info = pathinfo($_FILES["img"]["name"]);
+    $img_extension = strtolower($img_info['extension']);
+    
+    if (in_array($img_extension, $allowed_types)) {
+      $imgCadena = base64_encode(file_get_contents($img));
+      echo "Imagen como cadena: " . $imgCadena;
+    } else {
+      $imgErr = "Formato de imagen no válido. Solo se permiten JPEG, JPG, PNG, GIF.";
+    }
+  } else {
+    $imgErr = "Error al cargar la imagen";
+  }
+
+  // Insertar datos en la base de datos
+  $sql = "INSERT INTO gestion(nombre, firstls, secondls, email, pass, imgCadena) VALUES
+    	('" . $name . "', '" . $firstls . "', '" . $secondls . "', '" . $email . "','" . $pass . "', '" . $imgCadena . "')";
  
-	if ($conn->query($sql) === TRUE) {
-    	echo "<h2>el estudiante se agregó correctamente</h2>";
-	} else {
-    	echo "Error: " . $sql . "<br>" . $conn->error;
-	}
+  if ($conn->query($sql) === TRUE) {
+    echo "<h2>El estudiante se agregó correctamente</h2>";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
 
-// Cerrar la conexión.
-$conn->close();
+  // Cerrar la conexión.
+  $conn->close();
 }
-
-
-	
-	
+	 
+// Función para limpiar y validar datos de entrada
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -85,12 +113,10 @@ function test_input($data) {
 ?>
 
 <?php
-echo "";
+// Mostrar datos de prueba (puedes eliminar esto en producción)
 echo $name;
 echo "<br>";
 echo $email;
-echo "<br>";
-echo $age;
 echo "<br>";
 echo $pass;
 ?>
