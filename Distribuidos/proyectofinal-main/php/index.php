@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Cerrar la conexión.
   $conn->close();
 }
-	
+	 
 // Función para limpiar y validar datos de entrada
 function test_input($data) {
   $data = trim($data);
