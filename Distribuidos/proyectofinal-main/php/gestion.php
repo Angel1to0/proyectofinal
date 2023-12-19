@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
 
-  // Cerrar la conexión.
+  // Cerrar la conexión. aaaaaaaa
   $conn->close();
 }
 	 
