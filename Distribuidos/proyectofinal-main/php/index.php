@@ -80,10 +80,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Procesar la imagen si se ha adjuntado
   if (isset($_FILES["img"]) && $_FILES["img"]["error"] == 0) {
     $img = $_FILES["img"]["tmp_name"];
-    $imgCadena = base64_encode(file_get_contents($img));
-    echo "Imagen como cadena: " . $imgCadena;
+    
+    // Verificar el tipo de imagen (puedes agregar más tipos según tus necesidades)
+    $allowed_types = array('jpeg', 'jpg', 'png', 'gif');
+    $img_info = pathinfo($_FILES["img"]["name"]);
+    $img_extension = strtolower($img_info['extension']);
+    
+    if (in_array($img_extension, $allowed_types)) {
+      $imgCadena = base64_encode(file_get_contents($img));
+      echo "Imagen como cadena: " . $imgCadena;
+    } else {
+      $imgErr = "Formato de imagen no válido. Solo se permiten JPEG, JPG, PNG, GIF.";
+    }
   } else {
-    echo "Error al cargar la imagen";
+    $imgErr = "Error al cargar la imagen";
   }
 
   // Insertar datos en la base de datos
