@@ -1,16 +1,11 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title>SARPA</title>
 
-	<link rel="stylesheet" href="css/formularios.css">
-
-	<!-- ESTILOS -->
-	<style type="text/css"></style>
+	<link rel="stylesheet" href="../css/formularios.css">
 </head>
 <body>
-
 	<!-- HTML5 -->
 	<nav>
 		<a href="#">Inicio</a>
@@ -20,14 +15,14 @@
 	</nav>
 
 	<div class="container">
-		<img class="logo" src="./assets/img/SARPA.png" alt="logo-sarpa">
+		<img class="logo" src="../assets/img/SARPA.png" alt="logo-sarpa">
 	</div>
 
-	<form class="form" action="ejemplo.php" method="GET">
-	<h2>Registro de Gestión</h2>
+	<form class="form" action="../php/gestion.php" method="POST" enctype="multipart/form-data">
+	<h2>Registro de docente</h2>
 		<div class="wrapper">
             <i class="fa fa-user"></i>
-            <input type="text" class="input-group" id="name" name="name" placeholder="Nombre (requerido)"></div>
+            <input type="text" class="input-group" id="nombre" name="nombre" placeholder="Nombre (requerido)"></div>
 		<div class="wrapper">
 			<i class="fa fa-firstln"></i>
 			<input class="input-group" id="paterno" type="text" name="paterno" placeholder="Apellido Paterno (requerido)"></div>
@@ -42,7 +37,7 @@
 			<input class="input-group" id="pass" type="password" name='pass' placeholder="Password"></div>
 		<div class="wrapper">
 			<label for="photo">Foto de Perfil</label>
-			<input class="input-group" type="file" name="photo" id="photo">
+			<input class="input-group" type="file" name="img" id="img">
 		</div>		
 		<button type="submit" class="send-btn">Enviar</button>
 	</form>	
