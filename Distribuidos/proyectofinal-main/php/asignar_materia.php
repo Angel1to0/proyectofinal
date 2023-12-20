@@ -1,8 +1,8 @@
 <?php
 // Conectar a la base de datos (ajusta las credenciales según tu configuración)
 $servername = "localhost";
-$username = "tu_usuario";
-$password = "tu_contraseña";
+$username = "root";
+$password = "";
 $dbname = "sarpa";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
