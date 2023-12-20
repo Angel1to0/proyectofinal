@@ -28,8 +28,7 @@
             <!-- ... Agregar más opciones según tus materias ... -->
         </select>
 
-        <button type="submit" name="btn_asignar_materia">Asignar Materia</button>
-        <p><?php if(isset($_GET['asignacion_result'])){ echo $_GET['asignacion_result']; } ?></p>
+        <button type="submit">Asignar Materia</button>
     </form>
 
     <!-- Formulario para actualizar calificaciones -->
@@ -53,8 +52,7 @@
         <label for="nueva_calificacion">Nueva Calificación:</label>
         <input type="text" name="nueva_calificacion" id="nueva_calificacion" placeholder="Ingrese la nueva calificación">
 
-        <button type="submit" name="btn_actualizar_calificacion">Actualizar Calificación</button>
-        <p><?php if(isset($_GET['actualizacion_result'])){ echo $_GET['actualizacion_result']; } ?></p>
+        <button type="submit">Actualizar Calificación</button>
     </form>
 
 </body>
