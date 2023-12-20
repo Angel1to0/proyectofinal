@@ -1,5 +1,5 @@
 <?php
-// Conectar a la base de datos (ajusta las credenciales según tu configuración)
+// Autenticarse en la BD (Base de Datos)
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -26,15 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn_asignar_materia'])
         $sql_asignar_materia = "INSERT INTO calificaciones (boleta_alumno, id_materia) VALUES ($boleta_asignar, '$materia_asignar')";
 
         if ($conn->query($sql_asignar_materia) === TRUE) {
-            header("Location: gestion_alumnos.html?asignacion_result=Materia asignada correctamente");
-            exit();
+            echo "Materia asignada correctamente";
         } else {
-            header("Location: gestion_alumnos.html?asignacion_result=Error al asignar la materia: " . $conn->error);
-            exit();
+            echo "Error al asignar la materia: " . $conn->error;
         }
     } else {
-        header("Location: gestion_alumnos.html?asignacion_result=La materia ya está asignada a este alumno");
-        exit();
+        echo "La materia ya está asignada a este alumno";
     }
 }
 
