@@ -12,21 +12,11 @@
 
     <!-- Formulario para asignar materias -->
     <form action="asignar_materia.php" method="POST">
-        <label for="boleta_asignar">Seleccionar Alumno:</label>
-        <select name="boleta_asignar" id="boleta_asignar">
-            <!-- Opciones de alumnos cargadas desde la base de datos -->
-            <option value="123">Alumno 1</option>
-            <option value="456">Alumno 2</option>
-            <!-- ... Agregar más opciones según tus alumnos ... -->
-        </select>
+        <label for="boleta_asignar">Boleta del Alumno:</label>
+        <input type="text" name="boleta_asignar" id="boleta_asignar" placeholder="Ingrese la boleta del alumno">
 
-        <label for="materia_asignar">Seleccionar Materia:</label>
-        <select name="materia_asignar" id="materia_asignar">
-            <!-- Opciones de materias cargadas desde la base de datos -->
-            <option value="matematicas">Matemáticas</option>
-            <option value="historia">Historia</option>
-            <!-- ... Agregar más opciones según tus materias ... -->
-        </select>
+        <label for="nombre_materia_asignar">Nombre de la Materia:</label>
+        <input type="text" name="nombre_materia_asignar" id="nombre_materia_asignar" placeholder="Ingrese el nombre de la materia">
 
         <button type="submit" name="btn_asignar_materia">Asignar Materia</button>
         <p><?php if(isset($_GET['asignacion_result'])){ echo $_GET['asignacion_result']; } ?></p>
@@ -34,24 +24,20 @@
 
     <!-- Formulario para actualizar calificaciones -->
     <form action="actualizar_calificacion.php" method="POST">
-        <label for="boleta_calificar">Seleccionar Alumno:</label>
-        <select name="boleta_calificar" id="boleta_calificar">
-            <!-- Opciones de alumnos cargadas desde la base de datos -->
-            <option value="123">Alumno 1</option>
-            <option value="456">Alumno 2</option>
-            <!-- ... Agregar más opciones según tus alumnos ... -->
-        </select>
+        <label for="boleta_calificar">Boleta del Alumno:</label>
+        <input type="text" name="boleta_calificar" id="boleta_calificar" placeholder="Ingrese la boleta del alumno">
 
-        <label for="materia_calificar">Seleccionar Materia:</label>
-        <select name="materia_calificar" id="materia_calificar">
-            <!-- Opciones de materias cargadas desde la base de datos -->
-            <option value="matematicas">Matemáticas</option>
-            <option value="historia">Historia</option>
-            <!-- ... Agregar más opciones según tus materias ... -->
-        </select>
+        <label for="nombre_materia_calificar">Nombre de la Materia:</label>
+        <input type="text" name="nombre_materia_calificar" id="nombre_materia_calificar" placeholder="Ingrese el nombre de la materia">
 
-        <label for="nueva_calificacion">Nueva Calificación:</label>
-        <input type="text" name="nueva_calificacion" id="nueva_calificacion" placeholder="Ingrese la nueva calificación">
+        <label for="calificacion_parcial1">Calificación Parcial 1:</label>
+        <input type="text" name="calificacion_parcial1" id="calificacion_parcial1" placeholder="Ingrese la calificación del parcial 1">
+
+        <label for="calificacion_parcial2">Calificación Parcial 2:</label>
+        <input type="text" name="calificacion_parcial2" id="calificacion_parcial2" placeholder="Ingrese la calificación del parcial 2">
+
+        <label for="calificacion_parcial3">Calificación Parcial 3:</label>
+        <input type="text" name="calificacion_parcial3" id="calificacion_parcial3" placeholder="Ingrese la calificación del parcial 3">
 
         <button type="submit" name="btn_actualizar_calificacion">Actualizar Calificación</button>
         <p><?php if(isset($_GET['actualizacion_result'])){ echo $_GET['actualizacion_result']; } ?></p>
