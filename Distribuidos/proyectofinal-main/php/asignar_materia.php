@@ -1,59 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestionar Alumnos</title>
-    <link rel="stylesheet" href="css/formularios.css">
-</head>
-<body>
+<?php
+// Conectar a la base de datos (ajusta las credenciales según tu configuración)
+$servername = "localhost";
+$username = "tu_usuario";
+$password = "tu_contraseña";
+$dbname = "sarpa";
 
-    <h2>Gestionar Calificaciones y Asignar Materias a Alumnos</h2>
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    <!-- Formulario para asignar materias -->
-    <form action="asignar_materia.php" method="POST">
-        <label for="boleta_asignar">Seleccionar Alumno:</label>
-        <select name="boleta_asignar" id="boleta_asignar">
-            <!-- Opciones de alumnos cargadas desde la base de datos -->
-            <option value="123">Alumno 1</option>
-            <option value="456">Alumno 2</option>
-            <!-- ... Agregar más opciones según tus alumnos ... -->
-        </select>
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-        <label for="materia_asignar">Seleccionar Materia:</label>
-        <select name="materia_asignar" id="materia_asignar">
-            <!-- Opciones de materias cargadas desde la base de datos -->
-            <option value="matematicas">Matemáticas</option>
-            <option value="historia">Historia</option>
-            <!-- ... Agregar más opciones según tus materias ... -->
-        </select>
+// Procesar el formulario de asignación de materias si se ha enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn_asignar_materia'])) {
+    $boleta_asignar = $_POST["boleta_asignar"];
+    $materia_asignar = $_POST["materia_asignar"];
 
-        <button type="submit">Asignar Materia</button>
-    </form>
+    // Verificar si ya está asignada la materia al alumno
+    $verificar_asignacion = "SELECT * FROM calificaciones WHERE boleta_alumno = $boleta_asignar AND id_materia = '$materia_asignar'";
+    $resultado_verificacion = $conn->query($verificar_asignacion);
 
-    <!-- Formulario para actualizar calificaciones -->
-    <form action="actualizar_calificacion.php" method="POST">
-        <label for="boleta_calificar">Seleccionar Alumno:</label>
-        <select name="boleta_calificar" id="boleta_calificar">
-            <!-- Opciones de alumnos cargadas desde la base de datos -->
-            <option value="123">Alumno 1</option>
-            <option value="456">Alumno 2</option>
-            <!-- ... Agregar más opciones según tus alumnos ... -->
-        </select>
+    if ($resultado_verificacion->num_rows == 0) {
+        // La asignación no existe, realizar la asignación
+        $sql_asignar_materia = "INSERT INTO calificaciones (boleta_alumno, id_materia) VALUES ($boleta_asignar, '$materia_asignar')";
 
-        <label for="materia_calificar">Seleccionar Materia:</label>
-        <select name="materia_calificar" id="materia_calificar">
-            <!-- Opciones de materias cargadas desde la base de datos -->
-            <option value="matematicas">Matemáticas</option>
-            <option value="historia">Historia</option>
-            <!-- ... Agregar más opciones según tus materias ... -->
-        </select>
+        if ($conn->query($sql_asignar_materia) === TRUE) {
+            header("Location: gestion_alumnos.html?asignacion_result=Materia asignada correctamente");
+            exit();
+        } else {
+            header("Location: gestion_alumnos.html?asignacion_result=Error al asignar la materia: " . $conn->error);
+            exit();
+        }
+    } else {
+        header("Location: gestion_alumnos.html?asignacion_result=La materia ya está asignada a este alumno");
+        exit();
+    }
+}
 
-        <label for="nueva_calificacion">Nueva Calificación:</label>
-        <input type="text" name="nueva_calificacion" id="nueva_calificacion" placeholder="Ingrese la nueva calificación">
-
-        <button type="submit">Actualizar Calificación</button>
-    </form>
-
-</body>
-</html>
+// Cerrar la conexión
+$conn->close();
+?>
