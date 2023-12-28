@@ -30,7 +30,7 @@ if ($conn->connect_error) {
             padding: 0;
         }
 
-        .container {
+        .container{
             max-width: 600px;
             margin: 20px auto;
             background-color: #fff;
@@ -39,9 +39,9 @@ if ($conn->connect_error) {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        h2 {
+        .container h2 {
             text-align: center;
-            color: #333;
+            color: black;
             margin-bottom: 20px; /* Agregado para separar el título del formulario */
         }
 
@@ -53,6 +53,7 @@ if ($conn->connect_error) {
         label {
             margin-top: 10px;
             margin-bottom: 5px;
+            text-align: center;
             color: #555;
         }
 
@@ -98,40 +99,43 @@ if ($conn->connect_error) {
 <body>
 
     <div class="container">
-        <h2>Gestionar Calificaciones y Asignar Materias a Alumnos</h2>
+     
 
         <!-- Formulario para actualizar calificaciones -->
         <form action="../php/actualizar_calificacion.php" method="POST" enctype="multipart/form-data" class="form">
+
+        <h2>Gestionar Calificaciones y Asignar Materias a Alumnos</h2>
+
             <div class="select-container">
-                <div>
-                    <label for="boleta_calificar">Boleta del Alumno:</label>
-                    <select name="boleta_calificar" id="boleta_calificar">
-                        <?php
-                        // Consulta SQL para obtener la lista de boletas desde la tabla alumnos
-                        $query_boletas = mysqli_query($conn, "SELECT boleta FROM alumnos");
+                
+            <label for="boleta_calificar">Boleta del Alumno:</label>
+            <select name="boleta_calificar" id="boleta_calificar">
+                <?php
+                // Consulta SQL para obtener la lista de boletas desde la tabla alumnos
+                $query_boletas = mysqli_query($conn, "SELECT boleta FROM alumnos");
 
-                        // Iterar sobre los resultados y generar opciones del menú desplegable
-                        while ($row_boleta = mysqli_fetch_array($query_boletas)) {
-                            echo "<option value='" . $row_boleta['boleta'] . "'>" . $row_boleta['boleta'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
+                // Iterar sobre los resultados y generar opciones del menú desplegable
+                while ($row_boleta = mysqli_fetch_array($query_boletas)) {
+                    echo "<option value='" . $row_boleta['boleta'] . "'>" . $row_boleta['boleta'] . "</option>";
+                }
+                ?>
+            </select>
+        
 
-                <div>
-                    <label for="id_materia_calificar">Nombre de la Materia:</label>
-                    <select name="id_materia_calificar" id="id_materia_calificar">
-                        <?php
-                        // Consulta SQL para obtener la lista de materias desde la base de datos
-                        $query_materias = mysqli_query($conn, "SELECT id_materia, nombre FROM materias");
+        
+            <label for="id_materia_calificar">Nombre de la Materia:</label>
+            <select name="id_materia_calificar" id="id_materia_calificar">
+                <?php
+                // Consulta SQL para obtener la lista de materias desde la base de datos
+                $query_materias = mysqli_query($conn, "SELECT id_materia, nombre FROM materias");
 
-                        // Iterar sobre los resultados y generar opciones del menú desplegable
-                        while ($row_materia = mysqli_fetch_array($query_materias)) {
-                            echo "<option value='" . $row_materia['id_materia'] . "'>" . $row_materia['nombre'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
+                // Iterar sobre los resultados y generar opciones del menú desplegable
+                while ($row_materia = mysqli_fetch_array($query_materias)) {
+                    echo "<option value='" . $row_materia['id_materia'] . "'>" . $row_materia['nombre'] . "</option>";
+                }
+                ?>
+            </select>
+        
             </div>
 
             <label for="calificacion_parcial1">Calificación Parcial 1:</label>
