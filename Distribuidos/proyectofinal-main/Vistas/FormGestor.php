@@ -42,6 +42,7 @@ if ($conn->connect_error) {
         h2 {
             text-align: center;
             color: #333;
+            margin-bottom: 20px; /* Agregado para separar el título del formulario */
         }
 
         form {
@@ -85,7 +86,11 @@ if ($conn->connect_error) {
 
         .select-container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column; /* Cambiado de 'space-between' a 'column' */
+        }
+
+        .select-container div {
+            margin-bottom: 10px; /* Agregado para separar las dos listas desplegables */
         }
     </style>
 </head>
