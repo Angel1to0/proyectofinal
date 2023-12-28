@@ -1,8 +1,8 @@
 <?php
     include("Conexion.php");
     $conexion = conectar();
-    $ID = $_GET['id'];
-    $sql = "DELETE FROM alumnos WHERE id = '$id'";
+    $boleta = $_GET['boleta'];
+    $sql = "SELECT * FROM alumnos WHERE boleta = '$boleta'";
     $query = mysqli_query($conexion,$sql);
     if($query){
         header("Location: CRUD.php");

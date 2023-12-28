@@ -21,7 +21,7 @@
 
 <div class="container">
   <h2>Formulario de Calificaciones</h2>
-  <p>Por favor, ingresa la información requerida:</p>
+  
 
   <?php
   // Definir las variables con cadenas vacías

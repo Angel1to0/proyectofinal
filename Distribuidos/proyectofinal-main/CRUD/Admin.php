@@ -70,6 +70,9 @@
                         ?>
                     </tbody>
                 </table>
+                <a href="../Vistas/FormGestor.php">
+                    <button>Ir a la Ruta</button>
+                </a>
                 </div>
         </div>
     </main>
