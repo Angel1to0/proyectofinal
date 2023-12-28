@@ -59,15 +59,14 @@
                             while($row = mysqli_fetch_array($query)){
                         ?>
                         <tr>
-                            <th><?php echo $row['id'];?></th>
                             <th><?php echo $row['boleta'];?></th>
                             <th><?php echo $row['nombre'];?></th>
                             <th><?php echo $row['firstls'];?></th>
                             <th><?php echo $row['secondls'];?></th>
                             <th><?php echo $row['email'];?></th>
                             <th><?php echo $row['pass'];?></th>
-                            <th><a class = "neon" href="./Actualizar.php?id=<?php echo $row['id'] ?>">Editar</a></th>
-                            <th><a class = "neonE" href="./Eliminar.php?id= <?php echo $row['id'] ?>">Eliminar</a></th>
+                            <th><a class = "neon" href="./Actualizar.php?id=<?php echo $row['boleta'] ?>">Editar</a></th>
+                            <th><a class = "neonE" href="./Eliminar.php?id= <?php echo $row['boleta'] ?>">Eliminar</a></th>
 
                         </tr>
                         <?php
