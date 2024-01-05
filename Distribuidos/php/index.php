@@ -101,6 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pass = "";
   } else {
     $pass = test_input($_POST["pass"]);
+    $pass_cifrada = password_hash($pass, PASSWORD_DEFAULT);
   }
 
   // Procesar la imagen si se ha adjuntado
@@ -124,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Insertar datos en la base de datos
   $sql = "INSERT INTO alumnos(boleta, nombre, firstls, secondls, email, pass, imgCadena) VALUES
-    	('" . $boleta . "', '" . $name . "', '" . $firstls . "', '" . $secondls . "', '" . $email . "','" . $pass . "', '" . $imgCadena . "')";
+    	('" . $boleta . "', '" . $name . "', '" . $firstls . "', '" . $secondls . "', '" . $email . "','" . $pass_cifrada . "', '" . $imgCadena . "')";
 
   $verificar_boleta = mysqli_query($conn, "SELECT * FROM alumnos WHERE boleta = '$boleta' ");
   if(mysqli_num_rows($verificar_boleta) > 0){
@@ -161,7 +162,7 @@ echo $name;
 echo "<br>";
 echo $email;
 echo "<br>";
-echo $pass;
+echo $pass_cifrada;
 ?>
 <br>
 <a  class = "neon" href="../formulario.html">Iniciar Sesion</a>
