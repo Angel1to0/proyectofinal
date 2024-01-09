@@ -1,11 +1,14 @@
 <?php
-    include("Conexion.php");
-    $conexion = conectar();
-    $sql = "SELECT * FROM alumnos";
-    $query = mysqli_query($conexion,$sql);
-    #$row = mysqli_fetch_array($query);
-?>
+include("Conexion.php");
+$conexion = conectar();
 
+// Obtener boleta del alumno que ha iniciado sesión de la sesión actual
+session_start();
+$boleta_sesion = $_SESSION['boleta'];
+
+$sql = "SELECT * FROM alumnos WHERE boleta = '$boleta_sesion'";
+$query = mysqli_query($conexion, $sql);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -26,7 +29,7 @@
             </h2>
             <nav>
                 <a href="#" class="activo">información General</a>
-                <a href="#">Materias - Calificaciones</a>
+                <a href="./Alumno_materias.php">Materias - Calificaciones</a>
                 <a href="../formulario.html">Cerrar Sesion</a>
             </nav>
         </div>
