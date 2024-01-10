@@ -40,9 +40,9 @@ $nameErr = $firstlsErr = $secondlsErr = $emailErr = $passErr = $imgErr = $imgCad
 $name = $firstls = $secondls = $email = $pass = $img = $imgCadena = "";
 	
 // Autenticarse en la BD (Base de Datos)
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = "proyectofinal-bd.mysql.database.azure.com";
+$username = "Angel";
+$password = "Password123456";
 $dbname = "sarpa";
  
 // Crear conexión a la base de datos

@@ -52,9 +52,9 @@
   $boleta_calificarErr = $materia_calificarErr = $calificacionErr = "";
 
   // Autenticarse en la BD
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
+  $servername = "proyectofinal-bd.mysql.database.azure.com";
+  $username = "Angel";
+  $password = "Password123456";
   $dbname = "sarpa";
 
   // Crear conexión
