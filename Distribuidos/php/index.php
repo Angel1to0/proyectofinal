@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Insertar datos en la base de datos
   $sql = "INSERT INTO alumnos(boleta, nombre, firstls, secondls, email, pass, imgCadena) VALUES
-    	('" . $boleta . "', '" . $name . "', '" . $firstls . "', '" . $secondls . "', '" . $email . "','" . $pass_cifrada . "', '" . $imgCadena . "')";
+    	('" . $boleta . "', '" . $name . "', '" . $firstls . "', '" . $secondls . "', '" . $email . "','" . $pass . "', '" . $imgCadena . "')";
 
   $verificar_boleta = mysqli_query($conn, "SELECT * FROM alumnos WHERE boleta = '$boleta' ");
   if(mysqli_num_rows($verificar_boleta) > 0){
